@@ -15,6 +15,7 @@ const rideRoutes = require('./routes/rideRoutes');
 const driverRoutes = require('./routes/driverRoutes');
 const ratingRoutes = require('./routes/ratingRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const locationRoutes = require('./routes/locationRoutes');
 
 connectDB();
 
@@ -39,6 +40,7 @@ app.use('/api/rides', rideRoutes);
 app.use('/api/drivers', driverRoutes);
 app.use('/api/ratings', ratingRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/location', locationRoutes);
 
 registerSocketHandlers(io);
 
