@@ -1,19 +1,13 @@
-import axios from 'axios';
-
-export const LOCATIONIQ_API_KEY = 'pk.b83d429f4337f42a2cd78874c169dcf3';
+import api from './client';
 
 /**
- * Queries LocationIQ Autocomplete API
+ * Queries LocationIQ Autocomplete API via Backend Proxy
  */
 export async function fetchPlacesAutocomplete(input) {
   if (!input || input.trim() === '') return [];
   try {
-    const response = await axios.get('https://api.locationiq.com/v1/autocomplete', {
-      params: {
-        key: LOCATIONIQ_API_KEY,
-        q: input,
-        limit: 5,
-      },
+    const response = await api.get('/location/autocomplete', {
+      params: { q: input },
     });
     if (response.data && Array.isArray(response.data)) {
       return response.data.map(p => ({
@@ -41,18 +35,13 @@ export async function fetchPlaceDetails(placeId) {
 }
 
 /**
- * Queries LocationIQ Forward Geocoding Search API
+ * Queries LocationIQ Forward Geocoding Search API via Backend Proxy
  */
 export async function geocodeAddress(address) {
   if (!address || address.trim() === '') return null;
   try {
-    const response = await axios.get('https://us1.locationiq.com/v1/search', {
-      params: {
-        key: LOCATIONIQ_API_KEY,
-        q: address,
-        format: 'json',
-        limit: 1,
-      },
+    const response = await api.get('/location/geocode', {
+      params: { q: address },
     });
     if (response.data && response.data.length > 0) {
       const result = response.data[0];
@@ -70,17 +59,12 @@ export async function geocodeAddress(address) {
 }
 
 /**
- * Queries LocationIQ Reverse Geocoding API
+ * Queries LocationIQ Reverse Geocoding API via Backend Proxy
  */
 export async function reverseGeocodeCoords(lat, lon) {
   try {
-    const response = await axios.get('https://us1.locationiq.com/v1/reverse', {
-      params: {
-        key: LOCATIONIQ_API_KEY,
-        lat,
-        lon,
-        format: 'json',
-      },
+    const response = await api.get('/location/reverse', {
+      params: { lat, lon },
     });
     if (response.data && response.data.display_name) {
       return response.data.display_name;
@@ -93,19 +77,17 @@ export async function reverseGeocodeCoords(lat, lon) {
 }
 
 /**
- * Queries LocationIQ Routing Directions API
+ * Queries LocationIQ Routing Directions API via Backend Proxy
  */
 export async function fetchDirections(origin, destination) {
   try {
     const originStr = `${origin.longitude},${origin.latitude}`;
     const destStr = `${destination.longitude},${destination.latitude}`;
-    const url = `https://us1.locationiq.com/v1/directions/driving/${originStr};${destStr}`;
 
-    const response = await axios.get(url, {
+    const response = await api.get('/location/directions', {
       params: {
-        key: LOCATIONIQ_API_KEY,
-        overview: 'full',
-        geometries: 'geojson',
+        origin: originStr,
+        destination: destStr,
       },
     });
 
