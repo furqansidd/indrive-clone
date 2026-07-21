@@ -1,0 +1,19 @@
+# Node dependencies
+node_modules/
+
+# Local configuration and credentials
+.env
+backend/.env
+
+# Mobile App builds and logs
+mobile/.expo/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Backend temporary files and uploads
+backend/uploads/
+
+# OS specific files
+.DS_Store
+Thumbs.db

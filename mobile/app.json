@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "InDrive Clone",
+    "slug": "indrive-clone",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": { "backgroundColor": "#ffde00" },
+    "ios": {
+      "supportsTablet": true,
+      "config": { "usesNonExemptEncryption": false },
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "We need your location to match you with nearby drivers/riders."
+      }
+    },
+    "android": {
+      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"],
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBCbJepmKDqoR0oAqd-GZkDkT19uFlJR08"
+        }
+      }
+    }
+  }
+}

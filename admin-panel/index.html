@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>inDrive Clone — Admin Panel</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="login-view" class="view">
+    <div class="login-card">
+      <h1>Admin Login</h1>
+      <input id="login-email" type="email" placeholder="admin@example.com" />
+      <input id="login-password" type="password" placeholder="Password" />
+      <button onclick="login()">Log in</button>
+      <p id="login-error" class="error"></p>
+    </div>
+  </div>
+
+  <div id="dashboard-view" class="view hidden">
+    <header>
+      <h1>inDrive Clone — Admin</h1>
+      <button onclick="logout()">Log out</button>
+    </header>
+
+    <section class="stats" id="stats"></section>
+
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="drivers" onclick="switchTab('drivers')">Driver Verification</button>
+      <button class="tab-btn" data-tab="users" onclick="switchTab('users')">Users</button>
+      <button class="tab-btn" data-tab="rides" onclick="switchTab('rides')">Rides</button>
+    </nav>
+
+    <!-- DRIVERS TAB -->
+    <section id="tab-drivers" class="tab-content">
+      <h2>Driver Verification</h2>
+      <table id="drivers-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Vehicle Type</th>
+            <th>Make / Model</th>
+            <th>Plate</th>
+            <th>License</th>
+            <th>Registration</th>
+            <th>Insurance</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- USERS TAB -->
+    <section id="tab-users" class="tab-content hidden">
+      <h2>All Users</h2>
+      <table id="users-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Role</th>
+            <th>Active</th>
+            <th>Action</th>
+            <th>Ride History</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <!-- Rider Ride History Panel -->
+      <div id="rider-history-panel" class="history-panel hidden">
+        <h3 id="rider-history-title">Rider Rides</h3>
+        <button onclick="closePanel('rider-history-panel')">✕ Close</button>
+        <table id="rider-rides-table">
+          <thead><tr><th>Date</th><th>Pickup</th><th>Dropoff</th><th>Agreed Fare</th><th>Commission</th><th>Status</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- RIDES TAB -->
+    <section id="tab-rides" class="tab-content hidden">
+      <h2>Recent Rides</h2>
+      <div class="filter-row">
+        <input id="rides-filter-driver" type="text" placeholder="Filter by Driver ID..." />
+        <button onclick="applyRidesFilter()">Apply Filter</button>
+        <button onclick="clearRidesFilter()">Clear</button>
+      </div>
+      <table id="rides-table">
+        <thead>
+          <tr>
+            <th>Rider</th>
+            <th>Driver</th>
+            <th>Pickup</th>
+            <th>Dropoff</th>
+            <th>Agreed Fare</th>
+            <th>Commission</th>
+            <th>Driver Payout</th>
+            <th>Payment</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <!-- Driver Ride History Panel -->
+      <div id="driver-history-panel" class="history-panel hidden">
+        <h3 id="driver-history-title">Driver Rides</h3>
+        <button onclick="closePanel('driver-history-panel')">✕ Close</button>
+        <table id="driver-rides-table">
+          <thead><tr><th>Date</th><th>Pickup</th><th>Dropoff</th><th>Agreed Fare</th><th>Commission</th><th>Status</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
